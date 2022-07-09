@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Trade Calulator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid p-5 bg-primary text-white text-center">
+  <h1>My Stock Calulator</h1>
+  <p>Calaulate the Stop Loss and profit booking values.</p> 
+</div>
+  
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Calculate</h3>
+       <form action="/action_page.php">
+	   <div class="row">
+	   <label for="risk" class="form-label ">Risk and Reward Ratio</label>
+    <div class="col">
+      <input type="number" required placeholder='1' class="form-control" placeholder="Enter Risk Ratio" name="risk" 
+	  id="risk">
+	</div>
+    <div class="col">
+   <input type="number" required placeholder='2' class="form-control" placeholder="Enter Reward Ratio" name="reward" id="reward">
+    </div>
+  </div>
+  <div class="col-sm-4">
+  </div>
+    <div class="row">
+	   <label for="radio" class="form-label mb-3 mt-3">Select Type of Trade</label>
+    <div class="col">
+    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="long">Long
+  <label class="form-check-label mt-3" for="radio1"></label>
+    </div>
+    <div class="col">
+     <input type="radio" class="form-check-input" id="radio2" name="optradio" value="short">Short
+  <label class="form-check-label" for="radio2"></label>
+    </div>
+  </div>
+  <div class="mb-3 mt-3">
+    <label for="email" class="form-label">Risk Amount</label>
+    <input type="number" required step='0.01' value='0.00' placeholder='0.00' class="form-control" id="rmount" 
+	  placeholder="Enter Risk Amount" name="email">
+  </div>
+  <div class="mb-3 mt-3">
+    <label for="pwd" class="form-label">Entry Price</label>
+    <input type="number" required step='0.01' value='0.00' placeholder='0.00' class="form-control" id="eprice" 
+	   placeholder="Enter Price" name="pswd">
+  </div>
+  <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+</form> 
+    </div>
+    <div class="col-sm-4">
+      <h3>Results</h3>
+    <div class="row">
+    <div class="col">
+    <p id="tradeType">Trading Type:</p>
+	 <p id="stopLoss">Stop Loss: </p>
+	  <p id="sellingPrice">Exit Price: </p>
+	   <p id="qty">Quantity to Buy: </p>
+    </div>
+  </div>
+    </div>
+    <div class="col-sm-4">
+      <h3>Rules of Intraday Trading</h3>        
+      <p>Only one trade per day.</p>
+      <p>Always decided for Entry, Exit and Stop Loss before taking Trade.</p>
+	  <p>Identify the Support and Resistance.</p>
+	  <p>Confidently make entry and Exit on time</p>
+    </div>
+  </div>
+</div>
+<script>
+function myFunction() {
+var rate_value = null;
+var sellprice = null;
+var qtys = null;
+let risk =document.getElementById("risk").value;
+var reward = document.getElementById("reward").value;
+var entryPrice = document.getElementById("eprice").value;
+let ramount = document.getElementById("rmount").value;
+let riskPer =risk/100;
+let stoploss = entryPrice - (entryPrice * riskPer);
+let rmid = reward/100;
+    sellprice = +entryPrice + +(entryPrice * rmid);
+	qtys = ramount/(entryPrice - stoploss);
+var	shortloss = +entryPrice + +(entryPrice * riskPer);
+var	shortexit = entryPrice - (entryPrice * rmid);
+	 rate_value = document.querySelector('input[name="optradio"]:checked').value;
+	  document.getElementById("tradeType").innerHTML = "Trading Type : "+rate_value;
+	if(rate_value == 'long'){
+  document.getElementById("stopLoss").innerHTML = "Stop Loss : "+stoploss;
+  document.getElementById("sellingPrice").innerHTML = "Exit Price : "+sellprice;
+  document.getElementById("qty").innerHTML = "Quantity to Buy : "+qtys;
+  }else{
+  document.getElementById("stopLoss").innerHTML = "Stop Loss : "+ shortloss;
+  document.getElementById("sellingPrice").innerHTML = "Exit Price : "+shortexit;
+  document.getElementById("qty").innerHTML = "Quantity to Buy : "+(-qtys);
+  }
+}
+</script>
+</body>
+</html>
+

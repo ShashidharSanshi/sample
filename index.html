@@ -18,7 +18,7 @@
   <div class="row">
     <div class="col-sm-4">
       <h3>Calculate</h3>
-       <form action="/action_page.php">
+       <form action="#" method="post" onsubmit="myFunction();return false">
 	   <div class="row">
 	   <label for="risk" class="form-label ">Risk and Reward Ratio</label>
     <div class="col">
@@ -52,7 +52,7 @@
     <input type="number" required step='0.01' value='0.00' placeholder='0.00' class="form-control" id="eprice" 
 	   placeholder="Enter Price" name="pswd">
   </div>
-  <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form> 
     </div>
     <div class="col-sm-4">
@@ -106,4 +106,3 @@ var	shortexit = entryPrice - (entryPrice * rmid);
 </script>
 </body>
 </html>
-

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<div id="txt" style="background-color:LightGray;"></div>
 <head>
-  <title>Trade Calulator</title>
+   <title>Trade Calulator</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons.flaticon.com/png/512/5379/premium/5379500.png?token=exp=1657621342~hmac=928446fb164525f5458b180eb0279a88">
   <style>
 body {
   background-image: url('https://i.pinimg.com/originals/0f/1b/d4/0f1bd439527732b732ea974d01ec477b.png');
@@ -15,13 +17,11 @@ body {
 }
 </style>
 </head>
-<body>
-
+<body onload="startTime()">
 <div class="container-fluid p-5 bg-primary text-white text-center" style="background-image: url('https://img.freepik.com/free-vector/forex-trading-infographic-background_52683-40690.jpg');">
   <h1>My Stock Calulator</h1>
   <p>Calaulate the Stop Loss and profit booking values.</p> 
 </div>
-  
 <div class="container mt-5";
   background-repeat: no-repeat;
   background-attachment: fixed; 
@@ -71,9 +71,9 @@ body {
     <div class="row">
     <div class="col" style="background-color:LightGray;">
 	<div>
-    <p id="tradeType" style="color:green;">Trading Type:</p>
+    <p id="tradeType" style="color:blue;">Trading Type:</p>
 	 <p id="stopLoss" style="color:red;">Stop Loss: </p>
-	  <p id="sellingPrice" style="color:blue;">Exit Price: </p>
+	  <p id="sellingPrice" style="color:green;">Exit Price: </p>
 	   <p id="qty">Quantity to Buy: </p>
     </div>
 	</div>
@@ -82,7 +82,7 @@ body {
     <thead>
       <tr>
         <th>Buy Amount</th>
-        <th>SL Amount</th>
+        <th>Risk Amount</th>
       </tr>
     </thead>
     <tbody>
@@ -156,16 +156,30 @@ let rmid = reward/100;
 var	shortloss = +entryPrice + +(entryPrice * riskPer);
 var	shortexit = entryPrice - (entryPrice * rmid);
 	 rate_value = document.querySelector('input[name="optradio"]:checked').value;
-	  document.getElementById("tradeType").innerHTML = "Trading Type : "+rate_value;
+	  document.getElementById("tradeType").innerHTML = "<b>Trading Type : "+rate_value+'</b>';
 	if(rate_value == 'long'){
-  document.getElementById("stopLoss").innerHTML = "Stop Loss : "+stoploss;
-  document.getElementById("sellingPrice").innerHTML = "Exit Price : "+sellprice;
-  document.getElementById("qty").innerHTML = "Quantity to Buy : "+qtys;
+  document.getElementById("stopLoss").innerHTML = "<b>Stop Loss : "+stoploss+'</b>';
+  document.getElementById("sellingPrice").innerHTML = "<b>Exit Price : "+sellprice+'</b>';
+  document.getElementById("qty").innerHTML = "<b>Quantity to Buy : "+qtys+'</b>';
   }else{
-  document.getElementById("stopLoss").innerHTML = "Stop Loss : "+ shortloss;
-  document.getElementById("sellingPrice").innerHTML = "Exit Price : "+shortexit;
-  document.getElementById("qty").innerHTML = "Quantity to Buy : "+(-qtys);
+  document.getElementById("stopLoss").innerHTML = "<b>Stop Loss : "+ shortloss+'</b>';
+  document.getElementById("sellingPrice").innerHTML = "<b>Exit Price : "+shortexit+'</b>';
+  document.getElementById("qty").innerHTML = "<b>Quantity to Buy : "+(-qtys)+'</b>';
   }
+}
+function startTime() {
+  const today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+  setTimeout(startTime, 1000);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
 }
 </script>
 </body>
